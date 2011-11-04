@@ -1,0 +1,11 @@
+{
+  "name": "Search Key",
+  "version": "0.1",
+  "description": "Use any website's search with the press of a key!",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["jquery.min.js", "jquery.hotkeys.js", "detector.js"]
+    }
+  ]
+}
