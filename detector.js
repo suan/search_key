@@ -2,7 +2,7 @@ var key_combo;
 if (localStorage['key_combo'] == undefined){ key_combo = 'ctrl+shift+f'; }
 else{ localStorage['key_combo']; }
 
-$(document).bind('keyup', key_combo, function(){
+jwerty.key(key_combo, function(){
   var $search_box;
   var $search_inputs = $('input[type="search"]:visible');
 
