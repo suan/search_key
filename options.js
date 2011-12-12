@@ -1,3 +1,21 @@
+var delimiter = '+';
+var shift_sign = 'shift';
+var meta_sign = 'super';
+var ctrl_sign = 'ctrl';
+var alt_sign = 'alt';
+
+var platform = navigator.platform.toLowerCase();
+if (platform.indexOf('mac') >= 0){
+  delimiter = '';
+  shift_sign = '⇧';
+  meta_sign = '⌘';
+  ctrl_sign = '^';
+  alt_sign = '⌥';
+}
+else if (platform.indexOf('win') >= 0){
+  meta_sign = 'win';
+}
+
 var pressed = [];
 var released = [];
 
@@ -16,28 +34,29 @@ Array.prototype.matchesSet = function(other){
   return true;
 };
 
+function eval_key_event(e){
+  var event_array;
+  if (e.type == 'keydown'){ event_array = pressed; }
+  else { event_array = released; }
+
+  if (is_ascii(e.which)){
+    set_insert(event_array, String.fromCharCode(e.which).toUpperCase());
+  }
+  if (e.which == 91){ set_insert(event_array, meta_sign); }
+  if (e.ctrlKey){ set_insert(event_array, ctrl_sign); }
+  if (e.altKey){ set_insert(event_array, alt_sign); }
+  if (e.shiftKey){ set_insert(event_array, shift_sign); }
+  // if (e.metaKey){ set_insert(event_array, meta_sign); }
+}
+
 $(document).keypress(function(e) {
 }).keydown(function(e){
-  if (is_ascii(e.which)){
-    set_insert(pressed, String.fromCharCode(e.which).toLowerCase());
-  }
-  if (e.which == 91){ set_insert(pressed, 'meta'); }
-  if (e.ctrlKey){ set_insert(pressed, 'ctrl'); }
-  if (e.altKey){ set_insert(pressed, 'alt'); }
-  if (e.shiftKey){ set_insert(pressed, 'shift'); }
-  // if (e.metaKey){ set_insert(pressed, 'meta'); }
-}).keyup(function(e) {
-  if (is_ascii(e.which)){
-    set_insert(released, String.fromCharCode(e.which).toLowerCase());
-  }
-  if (e.which == 91){ set_insert(released, 'meta'); }
-  if (e.ctrlKey){ set_insert(released, 'ctrl'); }
-  if (e.altKey){ set_insert(released, 'alt'); }
-  if (e.shiftKey){ set_insert(released, 'shift'); }
-  // if (e.metaKey){ set_insert(released, 'meta'); }
+  eval_key_event(e);
+}).keyup(function(e){
+  eval_key_event(e);
 
   if (released.length && released.matchesSet(pressed)){
-    alert(pressed.join('+'));
+    alert(pressed.join(delimiter));
     pressed = [];
     released = [];
   }
