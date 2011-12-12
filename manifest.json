@@ -6,6 +6,7 @@
     "default_icon" : "icon_small.png",
     "default_title" : "Jump to this page's search box"
   },
+  "options_page" : "options.html",
   "icons" : {
     "128" : "icon.png"  
   },
