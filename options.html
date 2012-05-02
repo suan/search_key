@@ -2,32 +2,9 @@
 <head>
   <meta charset='utf-8'>
   <title>Search Key Options</title>
-  <script type="text/javascript" src="jquery.min.js"></script>
-  <script type="text/javascript" src="jquery.keycombinator.min.js"></script>
-  <script type="text/javascript">
-
-    $(document).ready(function(){
-      $('#keyComboBox').makeKeyCombinator({
-        onComplete: function(keyComboData){
-          localStorage['key_combo'] = JSON.stringify(keyComboData);
-        },
-        defaultCombos: {
-          mac: ['⌃', 'F'],
-          win: ['Ctrl', 'Shift', 'F'],
-          unix: ['Ctrl', 'Shift', 'F']
-        }
-      });
-
-      var comboData = localStorage['key_combo'];
-      if (!comboData){
-        $('#keyComboBox').defaultKeyCombinator();
-      }
-      else {
-        $('#keyComboBox').val(JSON.parse(comboData).comboString);
-      }
-    });
-
-  </script>
+  <script src="jquery.min.js"></script>
+  <script src="jquery.keycombinator.min.js"></script>
+  <script src="options.js"></script>
 </head>
 <body>
   <input type="text" id="keyComboBox"/>

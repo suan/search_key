@@ -1,0 +1,18 @@
+<html>
+<head>
+  <meta charset='utf-8'>
+  <script src="jquery.min.js"></script>
+  <script src="jquery.keycombinator.min.js"></script>
+  <script src="options.js"></script>
+  <script>
+    $(document).ready(function(){
+      chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+         sendResponse(JSON.parse(localStorage.key_combo));
+      });
+    });
+  </script>
+</head>
+<body>
+  <input type="text" id="keyComboBox" style="visibility:hidden;"/>
+</body>
+</html>
